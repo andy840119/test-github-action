@@ -12,12 +12,12 @@ jobs:
           shared_component:
             - 'frontend/packages/app/src/lib/angular/**'
             - 'frontend/packages/app/src/lib/aj/**'
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Send the notification if edit the shared component.
       uses: wow-actions/auto-comment@2fc064c21cfb2505de3c5c10e1473b8eb7beca1a #v1.1.2
       if: steps.filter.outputs.shared_component == 'true'
       with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         pullRequestOpened: |
           Seems you touched the code in the frontend shared component, please make sure:
           - [ ] Update the change to the team to make sure that the scope is testable `in this sprint`.
