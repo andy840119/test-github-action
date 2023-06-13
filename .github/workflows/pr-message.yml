@@ -1,0 +1,24 @@
+name: PR message
+on: pull_request
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50 #v2.11.1
+      id: filter
+      with:
+        filters: |
+          shared_component:
+            - 'frontend/packages/app/src/lib/angular/**'
+            - 'frontend/packages/app/src/lib/aj/**'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Send the notification if edit the shared component.
+      uses: wow-actions/auto-comment@2fc064c21cfb2505de3c5c10e1473b8eb7beca1a #v1.1.2
+      if: steps.filter.outputs.shared_component == 'true'
+      with:
+        pullRequestOpened: |
+          Seems you touched the code in the frontend shared component, please make sure:
+          - [ ] Update the change to the team to make sure that the scope is testable `in this sprint`.
+          - [ ] Update the test scope to the `Jira Ticket`.
