@@ -1,0 +1,17 @@
+name: PR File Labeler
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  labler:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: PR File Labeler
+      uses: actions/labeler@v3
+      with:
+        repo-token: '${{ secrets.GITHUB_TOKEN }}'
+        configuration-path: '.github/pr-file-labeler.yml'

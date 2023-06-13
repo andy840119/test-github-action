@@ -1,0 +1,5 @@
+migration:
+   - 'app/**/migrations/*.py'
+fe:shared-component:
+   - 'frontend/packages/app/src/lib/angular/**' #anguar shared component
+   - 'frontend/packages/app/src/lib/aj/**' #anguarJS shared component
